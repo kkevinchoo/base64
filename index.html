@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base64 Converter</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+</head>
+<body>
+    <div class="container">
+        <h1>Base64 Converter</h1>
+
+        <div class="mode-toggle">
+            <label for="mode-switch">
+                <span id="mode-label">Decode Mode (Base64 to File)</span>
+            </label>
+            <div class="switch">
+                <input type="checkbox" id="mode-switch">
+                <span class="slider"></span>
+            </div>
+        </div>
+
+        <div class="converter-grid">
+            <div class="input-section">
+                <!-- Decode Mode Input (Base64 Text) -->
+                <div id="decode-input" class="card">
+                    <textarea id="base64-input" placeholder="Paste your base64 encoded data here..."></textarea>
+                </div>
+
+                <!-- Encode Mode Input (File Upload) -->
+                <div id="encode-input" class="card hidden">
+                    <div class="file-upload-container">
+                        <button id="file-select-btn" class="btn btn-outline">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                            Select File to Encode
+                        </button>
+                        <input type="file" id="file-input" class="hidden">
+                        <div id="file-info" class="hidden">
+                            <p class="file-info-title">Selected file:</p>
+                            <p id="file-name" class="file-info-name"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <!-- Decode Mode Buttons -->
+                    <div id="decode-buttons" class="m-auto">
+                        <button id="decode-btn" class="btn btn-primary">Decode Base64</button>
+                        <button id="clear-decode-btn" class="btn btn-outline">Clear</button>
+                    </div>
+
+                    <!-- Encode Mode Buttons -->
+                    <div id="encode-buttons" class="hidden m-auto">
+                        <button id="change-file-btn" class="btn btn-primary">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38"/></svg>
+                            Change File
+                        </button>
+                        <button id="copy-btn" class="btn btn-secondary hidden">Copy Base64</button>
+                        <button id="clear-encode-btn" class="btn btn-outline">Clear</button>
+                    </div>
+                </div>
+
+                <div id="alert" class="alert hidden">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                    <span id="alert-message"></span>
+                </div>
+            </div>
+
+            <div class="output-section card">
+                <!-- Decode Mode Output (Image or File) -->
+                <div id="decode-output">
+                    <div id="image-container" class="hidden">
+                        <img id="output-image" src="/placeholder.svg" alt="Generated from base64">
+                    </div>
+                    <div id="file-container" class="hidden">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="file-icon"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                        <p>This doesn't appear to be an image</p>
+                        <button id="download-btn" class="btn btn-primary">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                            Download File
+                        </button>
+                    </div>
+                    <div id="empty-decode-output" class="empty-message">
+                        <p>Your decoded content will appear here</p>
+                        <p class="small-text">Enter a valid base64 string and click Decode</p>
+                    </div>
+                </div>
+
+                <!-- Encode Mode Output (Base64 Text) -->
+                <div id="encode-output" class="hidden">
+                    <p class="output-title">Base64 Output</p>
+                    <div id="base64-output-container">
+                        <textarea id="base64-output" readonly></textarea>
+                    </div>
+                    <div id="empty-encode-output" class="empty-message">
+                        <p>Upload a file to see its base64 representation</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
